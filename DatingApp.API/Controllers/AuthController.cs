@@ -54,7 +54,7 @@ namespace DatingApp.API.Controllers
                 new Claim(ClaimTypes.Name, userFromRepo.Username)
             };
 
-            var key = new SymmetricSecurityKey
+            var key = new SymmetricSecurityKey()
         }
 
     }
