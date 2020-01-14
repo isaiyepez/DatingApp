@@ -1,4 +1,4 @@
-using System;
+using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using DatingApp.API.Models;
 
@@ -13,7 +13,7 @@ namespace DatingApp.API.Data
         }
         public async Task<User> Login(string username, string password)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.username == username);
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Username == username);
             if (user == null)
             {
                 return null;
@@ -33,8 +33,7 @@ namespace DatingApp.API.Data
                 var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
                 for (int i = 0; i < computedHash.Length; i++)
                 {
-                    if (computedHash[i] != passwordHash[i]) return false;
-                
+                    if (computedHash[i] != passwordHash[i]) return false;                
                 }
             }
             return true;
@@ -68,6 +67,7 @@ namespace DatingApp.API.Data
             {
                 return true;
             }
+            return false;
         }
     }
 }
