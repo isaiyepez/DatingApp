@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DatingApp.API.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace DatingApp.API.Controllers
 {
+    [Authorize] //DO NOT FORGET - when you use authorize, you have to specify the auth type in ConfigureServices
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase//Instead of "Controller", this one has no support for View
@@ -29,6 +31,7 @@ namespace DatingApp.API.Controllers
         }
 
         // GET api/values/5
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetValue(int id)
         {
