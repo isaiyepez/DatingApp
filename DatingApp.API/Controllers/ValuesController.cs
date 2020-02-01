@@ -21,7 +21,7 @@ namespace DatingApp.API.Controllers
 
         }
         // GET api/values
-        [HttpGet]
+        [AllowAnonymous]
         //We changed default ActionResult for IActionResult due we want to return http responses instead 
         // of traditional collection of strings (returned by ActionResult)
         public async Task<IActionResult> GetValues()
