@@ -5,6 +5,20 @@
    "version": "0.2.0",
    "configurations": [
        {
+           "type": "firefox",
+           "request": "launch",
+           "reAttach": true,
+           "name": "Launch index.html",
+           "url": "http://localhost:4200",
+           "webRoot": "${workspaceFolder}"
+       },
+       {
+           "type": "firefox",
+           "request": "attach",
+           "name": "Attach"
+       },
+
+       {
            "name": ".NET Core Attach",
            "type": "coreclr",
            "request": "attach",
