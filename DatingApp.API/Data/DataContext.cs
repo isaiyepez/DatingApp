@@ -10,5 +10,24 @@ namespace DatingApp.API.Data
         public DbSet<Value> Values { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Photo> Photos { get; set; }
+        public DbSet<Like> Likes { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder){
+            // Defining a composite primary key
+            builder.Entity<Like>()
+            .HasKey(K => new {K.LikerId, K.LikeeId});
+
+            builder.Entity<Like>()
+            .HasOne(u => u.Likee) // One likee, many likers
+            .WithMany(u => u.Likers)
+            .HasForeignKey(u => u.LikeeId)
+            .OnDelete(DeleteBehavior.Restrict); // If we had cascade, we will delete users.
+
+             builder.Entity<Like>()
+            .HasOne(u => u.Liker) // One liker, many likees. And that is how you "simulate" many-to-many in EF
+            .WithMany(u => u.Likees)
+            .HasForeignKey(u => u.LikerId)
+            .OnDelete(DeleteBehavior.Restrict);            
+        }
     }
 }
